@@ -3,13 +3,19 @@ const GlobalStyles = createGlobalStyle`
   :root {
     // sizes
     --default-border-radius: 10px;
+    --xl-border-radius: 20px;
     --default-font-size: 14px;
 
     // colors
     --white: #fff;
     --placeholder-color: #c0bcbc;
+    --gray-default: #7a8194;
+    
     // bg-colors
     --input-bg-color: #46464a;
+    --message-bg-incoming: #373E4E;
+    --message-bg-outgoing: #272A35;
+
   }
 
   * {
@@ -23,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    color: var(--white);
   }
 `;
 

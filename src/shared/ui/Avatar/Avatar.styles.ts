@@ -7,7 +7,7 @@ interface StyledAvatarProps {
 
 export const StyledAvatar = styled.img<StyledAvatarProps>`
   border-radius: 50%;
-  background-color: #7a8194;
+  background-color: var(--gray-default);
   ${(props) => {
     switch (props.size) {
       case AvatarSize.M:

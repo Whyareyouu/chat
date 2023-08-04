@@ -1,4 +1,4 @@
-import React, { FC, ImgHTMLAttributes } from "react";
+import { FC, ImgHTMLAttributes } from "react";
 import { StyledAvatar } from "shared/ui/Avatar/Avatar.styles";
 
 export enum AvatarSize {
