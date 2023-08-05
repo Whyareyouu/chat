@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { getRegState } from "features/RegisterationUser/model/selectors/getRegState";
 import { registrationActions } from "features/RegisterationUser/model/slice/registrationSlice";
 import { registrationUser } from "features/RegisterationUser/model/service/registrationUser";
+import { Button } from "shared/ui/Button/Button";
 
 export const RegistrationForm = () => {
   const dispatch = useAppDispatch();
@@ -50,7 +51,7 @@ export const RegistrationForm = () => {
         value={password}
         onChange={(e) => onChangePassword(e.target.value)}
       />
-      <button onClick={onRegUser}>Submit</button>
+      <Button onClick={onRegUser}>Submit</Button>
     </StyledRegistrationForm>
   );
 };

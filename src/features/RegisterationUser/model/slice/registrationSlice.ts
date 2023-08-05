@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RegistrationSchema } from "../types/registrationSchema";
-import { registrationUser } from "features/RegisterationUser/model/service/registrationUser";
+import { registrationUser } from "../service/registrationUser";
 
 const initialState: RegistrationSchema = {
   username: "",
