@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle`
     --gray-default: #7a8194;
     
     // bg-colors
+    --main-bg: #292F3F;
     --input-bg-color: #46464a;
     --message-bg-incoming: #373E4E;
     --message-bg-outgoing: #272A35;
