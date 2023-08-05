@@ -1,10 +1,10 @@
 import GlobalStyles from "./styles/styles";
-import { Input } from "shared/ui/Input/Input";
+import { RegistrationForm } from "features/RegisterationUser";
 function App() {
   return (
     <>
       <GlobalStyles />
-      <Input />
+      <RegistrationForm />
     </>
   );
 }
