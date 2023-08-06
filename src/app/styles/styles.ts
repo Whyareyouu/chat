@@ -8,9 +8,11 @@ const GlobalStyles = createGlobalStyle`
 
     // colors
     --white: #fff;
+    --primary: #B347EA;
+    --primary-hover: #bf3efe;
     --placeholder-color: #c0bcbc;
     --gray-default: #7a8194;
-    
+
     // bg-colors
     --main-bg: #292F3F;
     --input-bg-color: #46464a;

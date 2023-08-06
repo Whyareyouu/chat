@@ -42,7 +42,7 @@ export const LoginForm = () => {
         value={password}
         onChange={(e) => onChangePassword(e.target.value)}
       />
-      <Button onClick={onLogin}>Login</Button>
+      <Button onClick={onLogin}>Войти</Button>
     </StyledLoginForm>
   );
 };

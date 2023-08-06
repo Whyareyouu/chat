@@ -51,7 +51,7 @@ export const RegistrationForm = () => {
         value={password}
         onChange={(e) => onChangePassword(e.target.value)}
       />
-      <Button onClick={onRegUser}>Create account</Button>
+      <Button onClick={onRegUser}>Создайть аккаунт</Button>
     </StyledRegistrationForm>
   );
 };

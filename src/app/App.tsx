@@ -1,13 +1,14 @@
+import { Suspense } from "react";
 import GlobalStyles from "./styles/styles";
-import { RegistrationForm } from "features/RegisterationUser";
-import { LoginForm } from "features/AuthByUsername";
+import { AppRouter } from "app/providers/router";
+
 function App() {
   return (
     <>
       <GlobalStyles />
-      <RegistrationForm />
-      <br />
-      <LoginForm />
+      <Suspense fallback={<div>loading...</div>}>
+        <AppRouter />
+      </Suspense>
     </>
   );
 }

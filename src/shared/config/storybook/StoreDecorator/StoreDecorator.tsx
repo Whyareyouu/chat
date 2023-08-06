@@ -1,4 +1,4 @@
-import { Decorator, Story } from "@storybook/react";
+import { Decorator } from "@storybook/react";
 import { StateSchema, StoreProvider } from "app/providers/StoreProvider";
 import { DeepPartial } from "@reduxjs/toolkit";
 
