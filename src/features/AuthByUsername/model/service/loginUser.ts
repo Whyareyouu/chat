@@ -3,20 +3,19 @@ import axios from "axios";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localStorage";
 import { User, userActions } from "entities/User";
 
-interface RegistrationUserProps {
-  username: string;
+interface LoginProps {
   email: string;
   password: string;
 }
 
-export const registrationUser = createAsyncThunk<
+export const loginUser = createAsyncThunk<
   User,
-  RegistrationUserProps,
+  LoginProps,
   { rejectValue: string }
->("registration/registrationUser", async (userData, thunkAPI) => {
+>("login/loginUser", async (userData, thunkAPI) => {
   try {
     const response = await axios.post<User>(
-      "http://localhost:5555/users/registration",
+      "http://localhost:5555/users/login",
       userData
     );
 
