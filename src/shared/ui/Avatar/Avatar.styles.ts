@@ -26,5 +26,5 @@ export const StyledAvatar = styled.img<StyledAvatarProps>`
           height: 200px;
         `;
     }
-  }}
+  }};
 `;

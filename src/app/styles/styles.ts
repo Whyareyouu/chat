@@ -16,7 +16,8 @@ const GlobalStyles = createGlobalStyle`
     // bg-colors
     --main-bg: #292F3F;
     --input-bg-color: #46464a;
-    --message-bg-incoming: #373E4E;
+    --input-bg-hover: #4f4f55;
+    --message-bg-incoming: #434556;
     --message-bg-outgoing: #272A35;
 
   }
@@ -31,9 +32,26 @@ const GlobalStyles = createGlobalStyle`
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow: hidden;
     color: var(--white);
     background-color: var(--main-bg);
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #505a6b;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--main-bg);
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
   }
 `;
 

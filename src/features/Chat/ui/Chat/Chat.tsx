@@ -16,7 +16,7 @@ import {
 } from "features/Chat/model/service/chat";
 import { getMessages } from "features/Chat/model/selectors/getMessages";
 import { Message, MessageType } from "shared/ui/Message/Message";
-import { StyledChat } from "./Chat.styles";
+import { ChatContainer, Wrapper } from "./Chat.styles";
 import { MessageSender } from "../MessageSender/MessageSender";
 
 interface ChatProps {
@@ -55,16 +55,19 @@ export const Chat: FC<ChatProps> = ({ recipientId }) => {
   }, [message, user, recipientId]);
 
   return (
-    <StyledChat>
-      {messages.map((message) => (
-        <Fragment key={message.id}>
-          {message.senderId === user?.id ? ( // fix
-            <Message children={message.content} type={MessageType.OUTGOING} />
-          ) : (
-            <Message children={message.content} type={MessageType.INCOMING} />
-          )}
-        </Fragment>
-      ))}
+    <Wrapper>
+      <ChatContainer>
+        {messages.map((message) => (
+          <Fragment key={message.id}>
+            {message.senderId === user?.id ? ( // fix
+              <Message children={message.content} type={MessageType.OUTGOING} />
+            ) : (
+              <Message children={message.content} type={MessageType.INCOMING} />
+            )}
+          </Fragment>
+        ))}
+      </ChatContainer>
+
       <div>
         <MessageSender
           handleSendMessage={handleSendMessage}
@@ -72,6 +75,6 @@ export const Chat: FC<ChatProps> = ({ recipientId }) => {
           value={message}
         />
       </div>
-    </StyledChat>
+    </Wrapper>
   );
 };

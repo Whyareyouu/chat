@@ -4,6 +4,7 @@ import { userReducer } from "entities/User";
 import { registrationReducer } from "features/RegisterationUser";
 import { loginReducer } from "features/AuthByUsername";
 import { chatReducer } from "features/Chat";
+import { searchingReducer } from "features/SearchingUsers";
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducers: ReducersMapObject<StateSchema> = {
@@ -11,6 +12,7 @@ export function createReduxStore(initialState?: StateSchema) {
     registrationForm: registrationReducer,
     login: loginReducer,
     chat: chatReducer,
+    searching: searchingReducer,
   };
 
   return configureStore<StateSchema>({
