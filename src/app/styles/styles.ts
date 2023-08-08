@@ -33,6 +33,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     overflow-x: hidden;
     color: var(--white);
+    background-color: var(--main-bg);
   }
 `;
 
