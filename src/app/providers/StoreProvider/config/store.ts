@@ -3,8 +3,9 @@ import { StateSchema } from "./StateSchema";
 import { userReducer } from "entities/User";
 import { registrationReducer } from "features/RegisterationUser";
 import { loginReducer } from "features/AuthByUsername";
-import { chatReducer } from "features/Chat";
 import { searchingReducer } from "features/SearchingUsers";
+import { chatReducer } from "entities/Chat";
+import { allUserChatsReducer } from "widgets/Sidebar";
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducers: ReducersMapObject<StateSchema> = {
@@ -13,6 +14,7 @@ export function createReduxStore(initialState?: StateSchema) {
     login: loginReducer,
     chat: chatReducer,
     searching: searchingReducer,
+    allUserChats: allUserChatsReducer,
   };
 
   return configureStore<StateSchema>({

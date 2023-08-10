@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Chat } from "features/Chat";
 import { Sidebar } from "widgets/Sidebar";
 import { StyledChatPage } from "./ChatPage.styles";
 
 const ChatPage = () => {
+  const [recipientId, setRecipientId] = useState("");
+  const handleSelectMessageRecipient = (recipientId: string) => {
+    setRecipientId(recipientId);
+  };
   return (
     <StyledChatPage>
-      <Sidebar />
-      <Chat recipientId={"38c8f3bf-f0bf-4ff4-8ef0-576a15baf44f"} />
+      <Sidebar handleSelectMessageRecipient={handleSelectMessageRecipient} />
+      <Chat recipientId={recipientId} />
     </StyledChatPage>
   );
 };

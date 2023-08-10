@@ -1,19 +1,39 @@
-import React from "react";
+import React, { FC } from "react";
 import { StyledSidebar, Users } from "./Sidebar.styles";
-import { getSearchedUsers, SearchingUser } from "features/SearchingUsers";
+import {
+  getIsSearchingBool,
+  getSearchResult,
+  SearchingUser,
+} from "features/SearchingUsers";
 import { useSelector } from "react-redux";
-import { ShortUserProfile } from "shared/ui/ShortUserProfile/ShortUserProfile";
+import { getAllUserChats } from "widgets/Sidebar/model/selectors/getAllUserChats";
+import { ChatList } from "widgets/Sidebar/ui/ChatList/ChatList";
+import { SearchResultList } from "widgets/Sidebar/ui/SearchResultList/SearchResultList";
 
-export const Sidebar = () => {
-  const foundUsers = useSelector(getSearchedUsers);
+interface SidebarProps {
+  handleSelectMessageRecipient: (recipientId: string) => void;
+}
+
+export const Sidebar: FC<SidebarProps> = ({ handleSelectMessageRecipient }) => {
+  const isSearching = useSelector(getIsSearchingBool);
+  const searchingResult = useSelector(getSearchResult);
+  const userChats = useSelector(getAllUserChats);
+
   return (
     <StyledSidebar>
       <SearchingUser />
       <Users>
-        {foundUsers &&
-          foundUsers.map((user) => (
-            <ShortUserProfile key={user.id} username={user.username} />
-          ))}
+        {isSearching ? (
+          <SearchResultList
+            searchResult={searchingResult}
+            handleSelectMessageRecipient={handleSelectMessageRecipient}
+          />
+        ) : (
+          <ChatList
+            chats={userChats}
+            handleSelectMessageRecipient={handleSelectMessageRecipient}
+          />
+        )}
       </Users>
     </StyledSidebar>
   );

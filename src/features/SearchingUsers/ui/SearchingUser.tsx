@@ -1,11 +1,13 @@
 import { Input } from "shared/ui/Input/Input";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback } from "react";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
-import { searchingUser } from "features/SearchingUsers/model/service/searching";
+import { searchingUser } from "../model/service/searching";
 import { useDebounce } from "shared/lib/hooks/useDebounce/useDebounce";
+import { useSelector } from "react-redux";
+import { getSearchingQuery, searchingActions } from "features/SearchingUsers";
 
 export const SearchingUser = () => {
-  const [searchingQuery, setSearchingQuery] = useState("");
+  const searchingQuery = useSelector(getSearchingQuery);
   const dispatch = useAppDispatch();
   const fetchSearchedUsers = useCallback(
     (value: string) => {
@@ -16,7 +18,7 @@ export const SearchingUser = () => {
 
   const debouncedFetchSearchedUsers = useDebounce(fetchSearchedUsers, 500);
   const handleSearching = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchingQuery(event.target.value);
+    dispatch(searchingActions.setSearchingQuery(event.target.value));
     debouncedFetchSearchedUsers(event.target.value);
   };
   return (

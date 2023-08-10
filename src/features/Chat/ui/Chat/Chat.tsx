@@ -7,17 +7,18 @@ import React, {
   useState,
 } from "react";
 import { useSelector } from "react-redux";
-import { getUserData } from "entities/User";
+import { getUserId } from "entities/User";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 import {
   listenToMessageData,
   sendMessage,
   stopListenToMessageDataProps,
 } from "features/Chat/model/service/chat";
-import { getMessages } from "features/Chat/model/selectors/getMessages";
 import { Message, MessageType } from "shared/ui/Message/Message";
 import { ChatContainer, Wrapper } from "./Chat.styles";
 import { MessageSender } from "../MessageSender/MessageSender";
+import { getMessagesWithUser } from "entities/Chat";
+import { EmptyChat } from "features/Chat/ui/EmptyChat/EmptyChat";
 
 interface ChatProps {
   recipientId: string;
@@ -25,19 +26,19 @@ interface ChatProps {
 
 export const Chat: FC<ChatProps> = ({ recipientId }) => {
   const dispatch = useAppDispatch();
-  const user = useSelector(getUserData);
-  const messages = useSelector(getMessages);
+  const userId = useSelector(getUserId);
+  const messages = useSelector(getMessagesWithUser);
 
   const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
     dispatch(
-      listenToMessageData({ senderId: user!.id, recipientId: recipientId })
+      listenToMessageData({ senderId: userId!, recipientId: recipientId })
     ); //fix
     return () => {
       dispatch(stopListenToMessageDataProps());
     };
-  }, []);
+  }, [recipientId]);
 
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
@@ -46,20 +47,23 @@ export const Chat: FC<ChatProps> = ({ recipientId }) => {
   const handleSendMessage = useCallback(() => {
     dispatch(
       sendMessage({
-        senderId: user!.id, //fix
+        senderId: userId!, //fix
         recipientId: recipientId,
         content: message,
       })
     );
     setMessage("");
-  }, [message, user, recipientId]);
+  }, [message, recipientId]);
 
+  if (!recipientId) {
+    return <EmptyChat />;
+  }
   return (
     <Wrapper>
       <ChatContainer>
         {messages.map((message) => (
           <Fragment key={message.id}>
-            {message.senderId === user?.id ? ( // fix
+            {message.senderId === userId ? ( // fix
               <Message children={message.content} type={MessageType.OUTGOING} />
             ) : (
               <Message children={message.content} type={MessageType.INCOMING} />

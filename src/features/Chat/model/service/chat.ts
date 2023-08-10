@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { socket } from "shared/config/socket/socket";
-import { chatActions } from "features/Chat/model/slice/chatSlice";
-import { ChatSchema } from "features/Chat/model/types/chatSchema";
+import { chatActions, MessagesWithUser } from "entities/Chat";
 
 interface ListenToMessageDataProps {
   senderId: string;
@@ -16,8 +15,8 @@ export const listenToMessageData = createAsyncThunk<
     senderId: data.senderId,
     recipientId: data.recipientId,
   });
-  socket.on("receiveMessages", (messages: ChatSchema[]) => {
-    thunkAPI.dispatch(chatActions.setMessages(messages));
+  socket.on("receiveMessages", (messages: MessagesWithUser[]) => {
+    thunkAPI.dispatch(chatActions.setMessagesWithUser(messages));
   });
 });
 
@@ -30,7 +29,7 @@ export const stopListenToMessageDataProps = createAsyncThunk(
 
 export const sendMessage = createAsyncThunk(
   "chat/sendMessage",
-  async (message: Omit<ChatSchema, "id">) => {
+  async (message: Omit<MessagesWithUser, "id">) => {
     socket.emit("sendMessage", message);
   }
 );

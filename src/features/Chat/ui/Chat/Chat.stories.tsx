@@ -25,18 +25,35 @@ export const Default: Story = {
           username: "123",
         },
       },
-      chat: [
-        {
-          recipientId: "f1b46d49-077e-4545-8cc8-9c0d9d1e16da",
-          senderId: "38c8f3bf-f0bf-4ff4-8ef0-576a15baf44f",
-          content: "Привет",
+      chat: {
+        messagesWithUser: [
+          {
+            recipientId: "f1b46d49-077e-4545-8cc8-9c0d9d1e16da",
+            senderId: "38c8f3bf-f0bf-4ff4-8ef0-576a15baf44f",
+            content: "Привет",
+          },
+          {
+            recipientId: "38c8f3bf-f0bf-4ff4-8ef0-576a15baf44f",
+            senderId: "f1b46d49-077e-4545-8cc8-9c0d9d1e16da",
+            content: "Привет!",
+          },
+        ],
+      },
+    }),
+  ],
+};
+export const UserNotSelected: Story = {
+  args: {
+    recipientId: "",
+  },
+  decorators: [
+    StoreDecorator({
+      user: {
+        userData: {
+          id: "38c8f3bf-f0bf-4ff4-8ef0-576a15baf44f",
+          username: "123",
         },
-        {
-          recipientId: "38c8f3bf-f0bf-4ff4-8ef0-576a15baf44f",
-          senderId: "f1b46d49-077e-4545-8cc8-9c0d9d1e16da",
-          content: "Привет!",
-        },
-      ],
+      },
     }),
   ],
 };

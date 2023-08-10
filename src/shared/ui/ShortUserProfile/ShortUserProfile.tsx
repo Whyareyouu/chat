@@ -1,21 +1,28 @@
 import { Avatar, AvatarSize } from "shared/ui/Avatar/Avatar";
 import { FC, HTMLAttributes } from "react";
-import { StyledShortUserProfile } from "./ShortUserProfile.styles";
+import {
+  LastMessage,
+  StyledShortUserProfile,
+  UserInfo,
+} from "./ShortUserProfile.styles";
 
 interface ShortUserProfileProps extends HTMLAttributes<HTMLDivElement> {
   username: string;
+  lastMessage?: string;
 }
 
 export const ShortUserProfile: FC<ShortUserProfileProps> = ({
   username,
+  lastMessage,
   onClick,
 }) => {
   return (
     <StyledShortUserProfile onClick={onClick}>
       <Avatar size={AvatarSize.M} />
-      <div>
+      <UserInfo>
         <span>{username}</span>
-      </div>
+        <LastMessage>{lastMessage}</LastMessage>
+      </UserInfo>
     </StyledShortUserProfile>
   );
 };

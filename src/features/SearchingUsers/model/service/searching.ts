@@ -1,26 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { SearchingSchema } from "../types/searchingSchema";
-import { searchingActions } from "../slice/searchingSlice";
+import { FoundUsers } from "../types/searchingSchema";
 
 export const searchingUser = createAsyncThunk(
   "searching/user",
-  async (searchingQuery: string, { dispatch }) => {
+  async (searchingQuery: string) => {
     try {
-      const response = await axios.get<SearchingSchema[]>(
+      const response = await axios.get<FoundUsers[]>(
         `http://localhost:5555/users/${searchingQuery}`
       );
-
-      if (!response.data) {
-        throw new Error();
-      }
-
-      dispatch(searchingActions.setSearchedUsers(response.data));
 
       return response.data;
     } catch (e) {
       console.log(e);
-      dispatch(searchingActions.setSearchedUsers([]));
+      throw e;
     }
   }
 );
