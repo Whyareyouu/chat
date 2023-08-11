@@ -3,7 +3,7 @@ export interface ChatSchema {
 }
 
 export type MessagesWithUser = {
-  id: string;
+  id: number;
   senderId: string;
   recipientId: string;
   content: string;

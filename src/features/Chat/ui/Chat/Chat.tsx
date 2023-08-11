@@ -1,7 +1,6 @@
 import React, {
   ChangeEvent,
   FC,
-  Fragment,
   useCallback,
   useEffect,
   useState,
@@ -14,11 +13,12 @@ import {
   sendMessage,
   stopListenToMessageDataProps,
 } from "features/Chat/model/service/chat";
-import { Message, MessageType } from "shared/ui/Message/Message";
-import { ChatContainer, Wrapper } from "./Chat.styles";
+
+import { Wrapper } from "./Chat.styles";
 import { MessageSender } from "../MessageSender/MessageSender";
 import { getMessagesWithUser } from "entities/Chat";
 import { EmptyChat } from "features/Chat/ui/EmptyChat/EmptyChat";
+import { MessageList } from "features/Chat/ui/MessageList/MessageList";
 
 interface ChatProps {
   recipientId: string;
@@ -34,7 +34,7 @@ export const Chat: FC<ChatProps> = ({ recipientId }) => {
   useEffect(() => {
     dispatch(
       listenToMessageData({ senderId: userId!, recipientId: recipientId })
-    ); //fix
+    );
     return () => {
       dispatch(stopListenToMessageDataProps());
     };
@@ -60,18 +60,7 @@ export const Chat: FC<ChatProps> = ({ recipientId }) => {
   }
   return (
     <Wrapper>
-      <ChatContainer>
-        {messages.map((message) => (
-          <Fragment key={message.id}>
-            {message.senderId === userId ? ( // fix
-              <Message children={message.content} type={MessageType.OUTGOING} />
-            ) : (
-              <Message children={message.content} type={MessageType.INCOMING} />
-            )}
-          </Fragment>
-        ))}
-      </ChatContainer>
-
+      <MessageList messages={messages} userId={userId!} />
       <div>
         <MessageSender
           handleSendMessage={handleSendMessage}

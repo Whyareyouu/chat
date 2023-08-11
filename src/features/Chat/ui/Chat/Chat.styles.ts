@@ -9,10 +9,3 @@ export const Wrapper = styled.div`
   gap: 20px;
   justify-content: space-between;
 `;
-export const ChatContainer = styled.div`
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  overflow-y: scroll;
-`;

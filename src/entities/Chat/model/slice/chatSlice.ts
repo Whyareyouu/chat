@@ -16,6 +16,7 @@ export const chatSlice = createSlice({
       action: PayloadAction<MessagesWithUser>
     ) => {
       state.messagesWithUser = [...state.messagesWithUser, action.payload];
+      return state;
     },
   },
 });

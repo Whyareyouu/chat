@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from "react";
+import React, { ChangeEvent, FC, KeyboardEvent } from "react";
 import { Textarea } from "shared/ui/Textarea/Textarea";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { StyledMessageSender } from "./MessageSender.styles";
@@ -14,9 +14,21 @@ export const MessageSender: FC<MessageSenderProps> = ({
   handleSendMessage,
   value,
 }) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Enter" && e.shiftKey) {
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
   return (
     <StyledMessageSender>
-      <Textarea placeholder={"Написать..."} onChange={onChange} value={value} />
+      <Textarea
+        placeholder={"Написать..."}
+        onChange={onChange}
+        value={value}
+        onKeyDown={handleKeyDown}
+      />
       <Button theme={ButtonTheme.PRIMARY} onClick={handleSendMessage}>
         Отправить
       </Button>

@@ -15,14 +15,12 @@ export const fetchAllUserChats = createAsyncThunk(
       if (!id) {
         throw new Error();
       }
-      console.log(id);
       const response = await axios.post("http://localhost:5555/messages/", {
         id: id,
       });
       if (!response) {
         throw new Error();
       }
-      console.log(response.data);
       return response.data;
     } catch (e) {
       console.log(e);
