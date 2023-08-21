@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Route, Routes } from "react-router-dom";
-import { routeConfig } from "shared/config/routeConfig/routeConfig";
+import {
+  AppRoutesProps,
+  routeConfig,
+} from "shared/config/routeConfig/routeConfig";
+import { RequireAuth } from "./RequireAuth";
 
 const AppRouter = () => {
-  return (
-    <Routes>
-      {Object.values(routeConfig).map((route) => (
-        <Route path={route.path} key={route.path} element={route.element} />
-      ))}
-    </Routes>
-  );
+  const renderWithWrapper = useCallback((route: AppRoutesProps) => {
+    return (
+      <Route
+        key={route.path}
+        path={route.path}
+        element={
+          route.authOnly ? (
+            <RequireAuth>{route.element}</RequireAuth>
+          ) : (
+            route.element
+          )
+        }
+      />
+    );
+  }, []);
+  return <Routes>{Object.values(routeConfig).map(renderWithWrapper)}</Routes>;
 };
 
 export default AppRouter;

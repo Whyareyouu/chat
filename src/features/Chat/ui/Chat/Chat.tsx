@@ -12,7 +12,7 @@ import {
   listenToMessageData,
   sendMessage,
   stopListenToMessageDataProps,
-} from "features/Chat/model/service/chat";
+} from "../../model/service/chat";
 
 import { Wrapper } from "./Chat.styles";
 import { MessageSender } from "../MessageSender/MessageSender";
