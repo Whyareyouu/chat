@@ -1,10 +1,10 @@
-import { Input } from "shared/ui/Input/Input";
 import { ChangeEvent, useCallback } from "react";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 import { searchingUser } from "../model/service/searching";
 import { useDebounce } from "shared/lib/hooks/useDebounce/useDebounce";
 import { useSelector } from "react-redux";
 import { getSearchingQuery, searchingActions } from "features/SearchingUsers";
+import { SearchInput } from "shared/ui/SearchInput/SearchInput";
 
 export const SearchingUser = () => {
   const searchingQuery = useSelector(getSearchingQuery);
@@ -22,7 +22,7 @@ export const SearchingUser = () => {
     debouncedFetchSearchedUsers(event.target.value);
   };
   return (
-    <Input
+    <SearchInput
       placeholder={"Поиск пользователей"}
       onChange={handleSearching}
       value={searchingQuery}

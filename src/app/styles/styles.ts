@@ -14,7 +14,10 @@ const GlobalStyles = createGlobalStyle`
     --gray-default: #7a8194;
 
     // bg-colors
-    --main-bg: #292F3F;
+    --main-bg: #181818;
+    --user-list-bg: #212121;
+    --user-list-hover: #2b2b2b;
+    --border-input: #2e2e2e;
     --input-bg-color: #46464a;
     --input-bg-hover: #4f4f55;
     --message-bg-incoming: #434556;

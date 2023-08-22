@@ -4,5 +4,4 @@ export const StyledChatPage = styled.div`
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin: 20px;
 `;

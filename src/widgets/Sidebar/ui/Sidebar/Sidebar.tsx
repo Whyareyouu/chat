@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { StyledSidebar, Users } from "./Sidebar.styles";
+import { BurgerMenu, Settings, StyledSidebar, Users } from "./Sidebar.styles";
 import {
   getIsSearchingBool,
   getSearchResult,
@@ -21,7 +21,10 @@ export const Sidebar: FC<SidebarProps> = ({ handleSelectMessageRecipient }) => {
 
   return (
     <StyledSidebar>
-      <SearchingUser />
+      <Settings>
+        <BurgerMenu />
+        <SearchingUser />
+      </Settings>
       <Users>
         {isSearching ? (
           <SearchResultList
