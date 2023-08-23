@@ -38,7 +38,7 @@ export const Chat: FC<ChatProps> = ({ recipientId }) => {
     return () => {
       dispatch(stopListenToMessageDataProps());
     };
-  }, [recipientId]);
+  }, [recipientId, dispatch]);
 
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
@@ -53,7 +53,7 @@ export const Chat: FC<ChatProps> = ({ recipientId }) => {
       })
     );
     setMessage("");
-  }, [message, recipientId]);
+  }, [message, recipientId, userId]);
 
   if (!recipientId) {
     return <EmptyChat />;

@@ -5,6 +5,7 @@ const GlobalStyles = createGlobalStyle`
     --default-border-radius: 10px;
     --xl-border-radius: 20px;
     --default-font-size: 14px;
+    --sidebar-width: 400px;
 
     // colors
     --white: #fff;

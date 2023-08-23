@@ -6,7 +6,7 @@ export const SearchInputWrapper = styled.label`
   display: flex;
   align-items: center;
   background-color: var(--main-bg);
-  padding: 16px;
+  padding: 10px;
   border-radius: 30px;
   gap: 10px;
   &:focus-within {

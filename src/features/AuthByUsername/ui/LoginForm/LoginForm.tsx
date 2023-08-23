@@ -28,7 +28,7 @@ export const LoginForm = () => {
 
   const onLogin = useCallback(() => {
     dispatch(loginUser({ email, password }));
-  }, [email, password]);
+  }, [email, password, dispatch]);
 
   return (
     <StyledLoginForm>
