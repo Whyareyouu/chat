@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
     // colors
     --white: #fff;
     --primary: #B347EA;
-    --primary-hover: #bf3efe;
+    --primary-hover: #7f4a99;
     --placeholder-color: #c0bcbc;
     --gray-default: #7a8194;
 

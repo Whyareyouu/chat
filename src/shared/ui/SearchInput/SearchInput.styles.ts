@@ -30,4 +30,7 @@ export const StyledSearchInput = styled.input`
   outline: none;
   background: none;
   color: var(--white);
+  ::placeholder {
+    color: var(--placeholder-color);
+  }
 `;

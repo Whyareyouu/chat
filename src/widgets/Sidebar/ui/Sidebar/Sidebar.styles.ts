@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const StyledSidebar = styled.div`
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   max-width: var(--sidebar-width);
   height: 100vh;
@@ -13,7 +16,6 @@ export const Settings = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 0 12px;
 `;
 
 export const Users = styled.div`
