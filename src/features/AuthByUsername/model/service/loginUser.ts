@@ -1,30 +1,34 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { USER_LOCALSTORAGE_KEY } from "shared/const/localStorage";
-import { User, userActions } from "entities/User";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "shared/const/localStorage";
+import { chatAPI } from "shared/api/api";
+import { fetchUserData } from "entities/User";
 
 interface LoginProps {
   email: string;
   password: string;
 }
 
+interface Response {
+  token: string;
+  refreshToken: string;
+}
+
 export const loginUser = createAsyncThunk<
-  User,
+  Response,
   LoginProps,
   { rejectValue: string }
 >("login/loginUser", async (userData, thunkAPI) => {
   try {
-    const response = await axios.post<User>(
-      "http://localhost:5555/users/login",
-      userData
-    );
+    const response = await chatAPI.post<Response>("/auth/login", userData);
 
     if (!response.data) {
       throw new Error();
     }
 
-    localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(response.data));
-    thunkAPI.dispatch(userActions.setAuthData(response.data));
+    localStorage.setItem(ACCESS_TOKEN, response.data?.token);
+    localStorage.setItem(REFRESH_TOKEN, response.data?.refreshToken);
+
+    thunkAPI.dispatch(fetchUserData());
 
     return response.data;
   } catch (e) {

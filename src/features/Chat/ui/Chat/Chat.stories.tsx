@@ -23,6 +23,9 @@ export const Default: Story = {
         userData: {
           id: "38c8f3bf-f0bf-4ff4-8ef0-576a15baf44f",
           username: "123",
+          email: "123",
+          name: "23",
+          avatar: "123",
         },
       },
       chat: {
@@ -52,6 +55,9 @@ export const UserNotSelected: Story = {
         userData: {
           id: "38c8f3bf-f0bf-4ff4-8ef0-576a15baf44f",
           username: "123",
+          email: "123",
+          name: "23",
+          avatar: "123",
         },
       },
     }),
