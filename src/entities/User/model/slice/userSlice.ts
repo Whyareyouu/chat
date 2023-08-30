@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, UserSchema } from "../types/user";
-import { USER_LOCALSTORAGE_KEY } from "shared/const/localStorage";
-import { loginUser } from "features/AuthByUsername/model/service/loginUser";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "shared/const/localStorage";
+import { fetchUserData } from "entities/User";
 
 const initialState: UserSchema = {
-  _inited: false,
+  isLoading: false,
+  error: "",
 };
 
 export const userSlice = createSlice({
@@ -16,16 +17,21 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       state.userData = undefined;
-      localStorage.removeItem(USER_LOCALSTORAGE_KEY);
+      localStorage.removeItem(ACCESS_TOKEN);
+      localStorage.removeItem(REFRESH_TOKEN);
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state._inited = true;
+      .addCase(fetchUserData.pending, (state) => {
+        state.isLoading = true;
       })
-      .addCase(loginUser.rejected, (state, action) => {
-        state._inited = false;
+      .addCase(fetchUserData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action?.payload as string;
+      })
+      .addCase(fetchUserData.fulfilled, (state) => {
+        state.isLoading = false;
       });
   },
 });

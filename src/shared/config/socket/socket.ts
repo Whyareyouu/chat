@@ -1,2 +1,3 @@
 import { io } from "socket.io-client";
-export const socket = io("http://localhost:5555");
+import { BASE_URL } from "shared/api/api";
+export const socket = io(BASE_URL);

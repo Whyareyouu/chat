@@ -7,8 +7,10 @@ import { getRegState } from "features/RegisterationUser/model/selectors/getRegSt
 import { registrationActions } from "features/RegisterationUser/model/slice/registrationSlice";
 import { registrationUser } from "features/RegisterationUser/model/service/registrationUser";
 import { Button } from "shared/ui/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 export const RegistrationForm = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { username, password, email } = useSelector(getRegState);
   const onChangeUsername = useCallback(
@@ -30,8 +32,9 @@ export const RegistrationForm = () => {
     [dispatch]
   );
 
-  const onRegUser = useCallback(() => {
-    dispatch(registrationUser({ username, email, password }));
+  const onRegUser = useCallback(async () => {
+    await dispatch(registrationUser({ username, email, password }));
+    navigate("/");
   }, [username, email, password]);
 
   return (

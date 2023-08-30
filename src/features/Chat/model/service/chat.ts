@@ -35,16 +35,3 @@ export const sendMessage = createAsyncThunk(
     socket.emit("sendMessage", message);
   }
 );
-
-// export const getInitialMessages = createAsyncThunk<
-//   any, //fix
-//   ListenToMessageDataProps
-// >("chat/listenToMessageData", async (data, thunkAPI) => {
-//   socket.emit("getMessages", {
-//     senderId: data.senderId,
-//     recipientId: data.recipientId,
-//   });
-//   socket.on("receiveMessages", (messages: MessagesWithUser[]) => {
-//     thunkAPI.dispatch(chatActions.setMessagesWithUser(messages));
-//   });
-// });

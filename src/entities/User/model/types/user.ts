@@ -8,5 +8,6 @@ export interface User {
 
 export interface UserSchema {
   userData?: User;
-  _inited: boolean;
+  isLoading: boolean;
+  error?: string;
 }

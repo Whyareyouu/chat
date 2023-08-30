@@ -7,6 +7,7 @@ import {
 } from "./BurgerMenu.styles";
 import { CgProfile } from "react-icons/cg";
 import { MdSaveAs } from "react-icons/md";
+import { CiLogout } from "react-icons/ci";
 
 export const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -55,6 +56,12 @@ export const BurgerMenu = () => {
             <MdSaveAs />
           </span>
           Сохраненные сообщения
+        </BurgerItem>
+        <BurgerItem>
+          <span>
+            <CiLogout />
+          </span>
+          Выйти
         </BurgerItem>
       </BurgerList>
     </StyledBurgerMenu>

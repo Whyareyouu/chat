@@ -7,8 +7,10 @@ import { useSelector } from "react-redux";
 import { getLoginState } from "features/AuthByUsername/model/selectors/getLoginState";
 import { loginActions } from "features/AuthByUsername/model/slice/loginSlice";
 import { loginUser } from "features/AuthByUsername/model/service/loginUser";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { email, password } = useSelector(getLoginState);
 
@@ -26,8 +28,9 @@ export const LoginForm = () => {
     [dispatch]
   );
 
-  const onLogin = useCallback(() => {
-    dispatch(loginUser({ email, password }));
+  const onLogin = useCallback(async () => {
+    await dispatch(loginUser({ email, password }));
+    navigate("/");
   }, [email, password, dispatch]);
 
   return (

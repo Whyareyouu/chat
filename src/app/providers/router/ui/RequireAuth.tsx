@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { getUserData } from "entities/User";
+import { getUserData, getUserError, getUserIsLoading } from "entities/User";
 import { Navigate, useLocation } from "react-router-dom";
 import { RoutePath } from "shared/config/routeConfig/routeConfig";
 import React, { ReactNode } from "react";
@@ -10,10 +10,12 @@ interface RequireAuthProps {
 }
 
 export function RequireAuth({ children }: RequireAuthProps) {
-  const auth = useSelector(getUserData);
+  const isLoading = useSelector(getUserIsLoading);
+  const error = useSelector(getUserError);
+  const token = localStorage.getItem(ACCESS_TOKEN);
   const location = useLocation();
 
-  if (!auth || !localStorage.getItem(ACCESS_TOKEN)) {
+  if (!token || (!isLoading && error)) {
     return <Navigate to={RoutePath.auth} state={{ from: location }} replace />;
   }
 
