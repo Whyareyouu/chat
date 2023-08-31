@@ -5,3 +5,5 @@ export { getUserId } from "./model/selectors/getUserId/getUserId";
 export { getUserError } from "./model/selectors/getUserError/getUserError";
 export { getUserIsLoading } from "./model/selectors/getUserIsLoading/getUserIsLoading";
 export { fetchUserData } from "./model/services/fetchUserData";
+export { updateUser } from "./model/services/updateUser";
+export { updateUserAvatar } from "./model/services/updateUserAvatar";
