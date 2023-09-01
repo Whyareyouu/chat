@@ -27,6 +27,7 @@ export const BurgerList = styled.ul<BurgerProps>`
   display: flex;
   flex-direction: column;
   gap: 6px;
+  z-index: 3;
 `;
 export const BurgerItem = styled.li`
   cursor: pointer;

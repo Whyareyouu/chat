@@ -1,5 +1,6 @@
 export interface ChatSchema {
   messagesWithUser: MessagesWithUser[];
+  recipientId: string;
 }
 
 export type MessagesWithUser = {

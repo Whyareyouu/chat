@@ -5,14 +5,14 @@ import {
   BurgerList,
   StyledBurgerMenu,
 } from "./BurgerMenu.styles";
-import { CgProfile } from "react-icons/cg";
-import { MdSaveAs } from "react-icons/md";
-import { CiLogout } from "react-icons/ci";
+import { menuConfig } from "features/BurgetMenu/ui/menu.config";
+import { useSelectSection } from "../lib/hooks/useSelectSection/useSelectSection";
 
 export const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
+  const { handleSelectSection } = useSelectSection();
 
   const handleToggleMenu = () => {
     setIsOpen((prev) => !prev);
@@ -45,24 +45,15 @@ export const BurgerMenu = () => {
         <BurgerIcon onClick={handleToggleMenu} />
       </div>
       <BurgerList isOpen={isOpen} ref={menuRef}>
-        <BurgerItem>
-          <span>
-            <CgProfile />
-          </span>{" "}
-          Профиль
-        </BurgerItem>
-        <BurgerItem>
-          <span>
-            <MdSaveAs />
-          </span>
-          Сохраненные сообщения
-        </BurgerItem>
-        <BurgerItem>
-          <span>
-            <CiLogout />
-          </span>
-          Выйти
-        </BurgerItem>
+        {menuConfig.map((menuItem) => (
+          <BurgerItem
+            key={menuItem.section}
+            onClick={() => handleSelectSection(menuItem.section)}
+          >
+            <span>{menuItem.icon}</span>
+            {menuItem.section}
+          </BurgerItem>
+        ))}
       </BurgerList>
     </StyledBurgerMenu>
   );

@@ -5,8 +5,12 @@ export const chatSlice = createSlice({
   name: "chat",
   initialState: {
     messagesWithUser: [],
+    recipientId: "",
   } as ChatSchema,
   reducers: {
+    setRecipientId: (state, action: PayloadAction<string>) => {
+      state.recipientId = action.payload;
+    },
     setMessagesWithUser: (state, action: PayloadAction<MessagesWithUser[]>) => {
       state.messagesWithUser = action.payload;
       return state;
