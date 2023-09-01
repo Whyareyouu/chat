@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
-import { MenuSection } from "features/BurgetMenu/ui/menu.config";
+import { useCallback, useEffect } from "react";
+import { MenuSection } from "../../../ui/menu.config";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 import { getUserId, userActions } from "entities/User";
 import { useSelector } from "react-redux";
-import { burgerActions } from "features/BurgetMenu/model/slice/burgerSlice";
+import { burgerActions } from "../../../model/slice/burgerSlice";
 import { getSelectedSection } from "features/BurgetMenu";
 import { chatActions } from "entities/Chat";
 

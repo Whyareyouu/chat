@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { FoundUsers } from "../types/searchingSchema";
 import { chatAPI } from "shared/api/api";
 

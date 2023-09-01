@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const StyledEmptyChat = styled.div`
+  max-width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

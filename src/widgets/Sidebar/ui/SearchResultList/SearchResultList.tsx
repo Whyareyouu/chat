@@ -1,6 +1,5 @@
-import React, { FC } from "react";
+import React from "react";
 import { ShortUserProfile } from "shared/ui/ShortUserProfile/ShortUserProfile";
-import { FoundUsers } from "features/SearchingUsers/model/types/searchingSchema";
 import { useSelector } from "react-redux";
 import { getSearchResult } from "features/SearchingUsers";
 import { chatActions } from "entities/Chat";

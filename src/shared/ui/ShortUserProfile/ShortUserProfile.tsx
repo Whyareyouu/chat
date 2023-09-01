@@ -9,16 +9,18 @@ import {
 interface ShortUserProfileProps extends HTMLAttributes<HTMLDivElement> {
   username: string;
   lastMessage?: string;
+  avatar?: string;
 }
 
 export const ShortUserProfile: FC<ShortUserProfileProps> = ({
   username,
   lastMessage,
   onClick,
+  avatar,
 }) => {
   return (
     <StyledShortUserProfile onClick={onClick}>
-      <Avatar size={AvatarSize.M} />
+      <Avatar size={AvatarSize.M} src={avatar} />
       <UserInfo>
         <span>{username}</span>
         <LastMessage>{lastMessage}</LastMessage>

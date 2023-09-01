@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { getUserData, updateUser, updateUserAvatar } from "entities/User";
 import { ChangeEvent, useCallback } from "react";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
+import { BASE_URL } from "shared/api/api";
 
 export const UserProfile = () => {
   const userData = useSelector(getUserData);
@@ -42,10 +43,7 @@ export const UserProfile = () => {
   return (
     <StyledUserProfile>
       <Label>
-        <Avatar
-          size={AvatarSize.XL}
-          src={`http://localhost:5555/${userData?.avatar}`}
-        />
+        <Avatar size={AvatarSize.XL} src={`${BASE_URL}/${userData?.avatar}`} />
         <UploadIcon />
         <input
           type="file"

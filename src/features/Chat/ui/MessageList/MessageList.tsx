@@ -28,10 +28,9 @@ export const MessageList: FC<MessageListProps> = ({ messages, userId }) => {
           ) : (
             <Message children={message.content} type={MessageType.INCOMING} />
           )}
-          <div ref={ref} />
         </Fragment>
       ))}
+      <div ref={ref} />
     </MessageContainer>
   );
 };
-// components/MessageList.tsx

@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  FC,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getUserId } from "entities/User";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
@@ -26,9 +20,7 @@ export const Chat = () => {
   const userId = useSelector(getUserId);
   const messages = useSelector(getMessagesWithUser);
   const dispatch = useAppDispatch();
-
   const [message, setMessage] = useState<string>("");
-
   useEffect(() => {
     dispatch(
       listenToMessageData({ senderId: userId!, recipientId: recipientId })
@@ -36,7 +28,7 @@ export const Chat = () => {
     return () => {
       dispatch(stopListenToMessageDataProps());
     };
-  }, [recipientId, dispatch]);
+  }, [recipientId, dispatch, userId]);
 
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
@@ -51,7 +43,7 @@ export const Chat = () => {
       })
     );
     setMessage("");
-  }, [message, recipientId, userId]);
+  }, [dispatch, message, recipientId, userId]);
 
   if (!recipientId) {
     return <EmptyChat />;

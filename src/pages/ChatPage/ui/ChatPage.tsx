@@ -1,9 +1,15 @@
-import React, { useState } from "react";
 import { Chat } from "features/Chat";
-import { Sidebar } from "widgets/Sidebar";
+import { fetchAllUserChats, Sidebar } from "widgets/Sidebar";
 import { StyledChatPage } from "./ChatPage.styles";
+import { useEffect } from "react";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 
 const ChatPage = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchAllUserChats());
+  }, [dispatch]);
+
   return (
     <StyledChatPage>
       <Sidebar />
