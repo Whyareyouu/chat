@@ -3,28 +3,29 @@ import { MenuSection } from "features/BurgetMenu/ui/menu.config";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 import { getUserId, userActions } from "entities/User";
 import { useSelector } from "react-redux";
+import { burgerActions } from "features/BurgetMenu/model/slice/burgerSlice";
+import { getSelectedSection } from "features/BurgetMenu";
+import { chatActions } from "entities/Chat";
 
 export const useSelectSection = () => {
-  const [selectSection, setSelectSection] = useState<MenuSection>(
-    MenuSection.ALL_CHATS
-  );
   const dispatch = useAppDispatch();
   const userId = useSelector(getUserId);
+  const selectedSection = useSelector(getSelectedSection);
 
   const handleSelectSection = useCallback(
     (section: MenuSection) => {
-      setSelectSection(section);
+      dispatch(burgerActions.setSelectSection(section));
     },
-    [selectSection]
+    [dispatch]
   );
   useEffect(() => {
-    switch (selectSection) {
+    switch (selectedSection) {
       case MenuSection.PROFILE:
         break;
       case MenuSection.ALL_CHATS:
         break;
       case MenuSection.SAVED_MESSAGES:
-        console.log(userId);
+        dispatch(chatActions.setRecipientId(userId!));
         break;
       case MenuSection.LOGOUT:
         dispatch(userActions.logout());
@@ -33,10 +34,10 @@ export const useSelectSection = () => {
       default:
         break;
     }
-  }, [selectSection, userId, dispatch]);
+  }, [selectedSection, userId, dispatch]);
 
   return {
-    selectSection,
+    selectedSection,
     handleSelectSection,
   };
 };

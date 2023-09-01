@@ -19,15 +19,13 @@ import { MessageSender } from "../MessageSender/MessageSender";
 import { getMessagesWithUser } from "entities/Chat";
 import { EmptyChat } from "features/Chat/ui/EmptyChat/EmptyChat";
 import { MessageList } from "features/Chat/ui/MessageList/MessageList";
+import { getRecipientId } from "entities/Chat/model/selectors/getRecipientId/getRecipientId";
 
-interface ChatProps {
-  recipientId: string;
-}
-
-export const Chat: FC<ChatProps> = ({ recipientId }) => {
-  const dispatch = useAppDispatch();
+export const Chat = () => {
+  const recipientId = useSelector(getRecipientId);
   const userId = useSelector(getUserId);
   const messages = useSelector(getMessagesWithUser);
+  const dispatch = useAppDispatch();
 
   const [message, setMessage] = useState<string>("");
 

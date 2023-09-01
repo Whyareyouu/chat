@@ -1,16 +1,18 @@
 import React, { FC } from "react";
 import { ShortUserProfile } from "shared/ui/ShortUserProfile/ShortUserProfile";
 import { FoundUsers } from "features/SearchingUsers/model/types/searchingSchema";
+import { useSelector } from "react-redux";
+import { getSearchResult } from "features/SearchingUsers";
+import { chatActions } from "entities/Chat";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 
-interface SearchResultListProps {
-  searchResult: FoundUsers[];
-  handleSelectMessageRecipient: (recipientId: string) => void;
-}
+export const SearchResultList = () => {
+  const searchResult = useSelector(getSearchResult);
+  const dispatch = useAppDispatch();
 
-export const SearchResultList: FC<SearchResultListProps> = ({
-  searchResult,
-  handleSelectMessageRecipient,
-}) => {
+  const handleSelectMessageRecipient = (recipientId: string) => {
+    dispatch(chatActions.setRecipientId(recipientId));
+  };
   if (searchResult.length === 0) {
     return <p>Пользователи не найдены.</p>;
   }

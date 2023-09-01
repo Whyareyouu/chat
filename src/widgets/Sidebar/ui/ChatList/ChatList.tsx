@@ -1,16 +1,17 @@
 import React, { FC } from "react";
 import { ShortUserProfile } from "shared/ui/ShortUserProfile/ShortUserProfile";
 import { UserChats } from "../../model/types/allUserChatsSchema";
+import { useSelector } from "react-redux";
+import { getAllUserChats } from "widgets/Sidebar/model/selectors/getAllUserChats";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
+import { chatActions } from "entities/Chat";
 
-interface ChatListProps {
-  chats: UserChats[];
-  handleSelectMessageRecipient: (contactId: string) => void;
-}
-
-export const ChatList: FC<ChatListProps> = ({
-  chats,
-  handleSelectMessageRecipient,
-}) => {
+export const ChatList = () => {
+  const chats = useSelector(getAllUserChats);
+  const dispatch = useAppDispatch();
+  const handleSelectMessageRecipient = (recipientId: string) => {
+    dispatch(chatActions.setRecipientId(recipientId));
+  };
   if (chats.length === 0) {
     return <p>У вас пока нет ни одного чата.</p>;
   }

@@ -4,6 +4,7 @@ import { LoginSchema } from "features/AuthByUsername";
 import { SearchingSchema } from "features/SearchingUsers";
 import { ChatSchema } from "entities/Chat";
 import { AllUserChatsSchema } from "widgets/Sidebar";
+import { BurgerSchema } from "features/BurgetMenu";
 
 export interface StateSchema {
   user: UserSchema;
@@ -12,4 +13,5 @@ export interface StateSchema {
   chat: ChatSchema;
   searching: SearchingSchema;
   allUserChats: AllUserChatsSchema;
+  burger: BurgerSchema;
 }

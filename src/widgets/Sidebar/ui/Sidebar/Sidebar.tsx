@@ -13,30 +13,12 @@ import { MenuSection } from "features/BurgetMenu/ui/menu.config";
 import { ChatList } from "widgets/Sidebar/ui/ChatList/ChatList";
 import { SearchResultList } from "widgets/Sidebar/ui/SearchResultList/SearchResultList";
 
-interface SidebarProps {
-  handleSelectMessageRecipient: (recipientId: string) => void;
-}
-
-export const Sidebar: FC<SidebarProps> = ({ handleSelectMessageRecipient }) => {
+export const Sidebar = () => {
   const isSearching = useSelector(getIsSearchingBool);
-  const searchingResult = useSelector(getSearchResult);
-  const userChats = useSelector(getAllUserChats);
-  const { selectSection } = useSelectSection();
-  const Profile = selectSection === MenuSection.PROFILE && <UserProfile />;
-  const Chats = selectSection === MenuSection.ALL_CHATS && (
-    <Users>
-      {isSearching ? (
-        <SearchResultList
-          searchResult={searchingResult}
-          handleSelectMessageRecipient={handleSelectMessageRecipient}
-        />
-      ) : (
-        <ChatList
-          chats={userChats}
-          handleSelectMessageRecipient={handleSelectMessageRecipient}
-        />
-      )}
-    </Users>
+  const { selectedSection } = useSelectSection();
+  const Profile = selectedSection === MenuSection.PROFILE && <UserProfile />;
+  const Chats = selectedSection === MenuSection.ALL_CHATS && (
+    <Users>{isSearching ? <SearchResultList /> : <ChatList />}</Users>
   );
 
   return (
