@@ -2,6 +2,7 @@ import React, { FC, Fragment, useEffect, useRef } from "react";
 import { MessagesWithUser } from "entities/Chat";
 import { Message, MessageType } from "shared/ui/Message/Message";
 import { MessageContainer } from "./MessageList.styles";
+import { ContextMenu } from "features/ContextMenu";
 
 interface MessageListProps {
   messages: MessagesWithUser[];
@@ -24,9 +25,13 @@ export const MessageList: FC<MessageListProps> = ({ messages, userId }) => {
       {messages.map((message) => (
         <Fragment key={message.id}>
           {message.senderId === userId ? (
-            <Message children={message.content} type={MessageType.OUTGOING} />
+            <ContextMenu>
+              <Message children={message.content} type={MessageType.OUTGOING} />
+            </ContextMenu>
           ) : (
-            <Message children={message.content} type={MessageType.INCOMING} />
+            <ContextMenu>
+              <Message children={message.content} type={MessageType.INCOMING} />
+            </ContextMenu>
           )}
         </Fragment>
       ))}
