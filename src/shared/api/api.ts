@@ -28,16 +28,23 @@ chatAPI.interceptors.response.use(
     const originalRequest = error.config;
     const refreshToken = localStorage.getItem(REFRESH_TOKEN);
     if (
-      error.response.status === 403 &&
+      error.response.status === 401 &&
       !originalRequest._retry &&
       refreshToken
     ) {
       originalRequest._retry = true;
 
-      const access_token = await chatAPI.post("/auth/refresh-token", {
-        refreshToken,
-      });
-      axios.defaults.headers.common["Authorization"] = "Bearer " + access_token;
+      const response = await chatAPI.post<{ token: string }>(
+        "/auth/refresh-token",
+        {
+          refreshToken,
+        }
+      );
+      if (!response.data?.token) {
+        return Promise.reject(error);
+      }
+      localStorage.setItem(ACCESS_TOKEN, response.data.token);
+      originalRequest.headers.Authorization = `Bearer  + ${response.data.token}`;
       return chatAPI(originalRequest);
     }
     return Promise.reject(error);
