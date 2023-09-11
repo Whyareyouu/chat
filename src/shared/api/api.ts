@@ -24,27 +24,21 @@ chatAPI.interceptors.response.use(
   (response) => {
     return response;
   },
-  async (error) => {
+  async function (error) {
     const originalRequest = error.config;
+    const refreshToken = localStorage.getItem(REFRESH_TOKEN);
     if (
-      error.response.status === 401 &&
+      error.response.status === 403 &&
       !originalRequest._retry &&
-      localStorage.getItem(REFRESH_TOKEN)
+      refreshToken
     ) {
       originalRequest._retry = true;
-      try {
-        const refreshToken = localStorage.getItem(REFRESH_TOKEN);
-        const response = await chatAPI.post("/auth/refresh-token", {
-          refreshToken,
-        });
-        if (response.data?.token) {
-          localStorage.setItem(ACCESS_TOKEN, response.data.token);
-        }
-        originalRequest.headers.Authorization = `Bearer ${response.data?.token}`;
-        return chatAPI(originalRequest);
-      } catch (e) {
-        return error;
-      }
+
+      const access_token = await chatAPI.post("/auth/refresh-token", {
+        refreshToken,
+      });
+      axios.defaults.headers.common["Authorization"] = "Bearer " + access_token;
+      return chatAPI(originalRequest);
     }
     return Promise.reject(error);
   }
