@@ -4,9 +4,10 @@ import { StyledContextMenu } from "./ContextMenu.styles";
 
 type MenuContextProps = {
   children: ReactNode;
+  className?: string;
 };
 
-export const ContextMenu: FC<MenuContextProps> = ({ children }) => {
+export const ContextMenu: FC<MenuContextProps> = ({ children, className }) => {
   const { clicked, setClicked, points, setPoints } = useContextMenu();
   return (
     <>
@@ -20,6 +21,7 @@ export const ContextMenu: FC<MenuContextProps> = ({ children }) => {
           });
           console.log("Right Click", e.pageX, e.pageY);
         }}
+        className={className}
       >
         {children}
       </div>
