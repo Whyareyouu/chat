@@ -1,7 +1,7 @@
 import React, { FC, Fragment, useEffect, useRef } from "react";
 import { MessagesWithUser } from "entities/Chat";
 import { Message, MessageType } from "shared/ui/Message/Message";
-import { MessageContainer } from "./MessageList.styles";
+import { MessageContainer, MessagesContainer } from "./MessageList.styles";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 import { messageActions } from "entities/Message";
 
@@ -23,25 +23,20 @@ export const MessageList: FC<MessageListProps> = ({ messages, userId }) => {
   }, [messages.length]);
 
   return (
-    <MessageContainer>
+    <MessagesContainer>
       {messages.map((message) => (
-        <Fragment key={message.id}>
+        <MessageContainer
+          key={message.id}
+          onContextMenu={() => dispatch(messageActions.setMessage(message))}
+        >
           {message.senderId === userId ? (
-            <Message
-              children={message.content}
-              type={MessageType.OUTGOING}
-              onContextMenu={() => dispatch(messageActions.setMessage(message))}
-            />
+            <Message children={message.content} type={MessageType.OUTGOING} />
           ) : (
-            <Message
-              children={message.content}
-              type={MessageType.INCOMING}
-              onContextMenu={() => dispatch(messageActions.setMessage(message))}
-            />
+            <Message children={message.content} type={MessageType.INCOMING} />
           )}
-        </Fragment>
+        </MessageContainer>
       ))}
       <div ref={ref} />
-    </MessageContainer>
+    </MessagesContainer>
   );
 };

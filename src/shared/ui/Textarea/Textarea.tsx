@@ -8,6 +8,7 @@ export const Textarea: FC<TextareaProps> = ({
   placeholder,
   value,
   onKeyDown,
+  name,
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -23,6 +24,7 @@ export const Textarea: FC<TextareaProps> = ({
 
   return (
     <StyledTextarea
+      name={name}
       placeholder={placeholder}
       ref={textareaRef}
       value={value}

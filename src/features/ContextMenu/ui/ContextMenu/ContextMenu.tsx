@@ -1,13 +1,10 @@
-import React, { FC, ReactNode, useCallback } from "react";
-import { useContextMenu } from "../libs/hooks/useContextMenu";
+import React, { FC, ReactNode, useCallback, useState } from "react";
+import { useContextMenu } from "../../libs/hooks/useContextMenu";
 import { StyledContextMenu } from "./ContextMenu.styles";
 import { useSelector } from "react-redux";
-import {
-  deleteMessage,
-  getMessageContent,
-  getMessageId,
-} from "entities/Message";
+import { deleteMessage, getMessage } from "entities/Message";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
+import { EditMessage } from "features/ContextMenu/ui/EditMessage/EditMessage";
 
 type MenuContextProps = {
   children: ReactNode;
@@ -15,8 +12,9 @@ type MenuContextProps = {
 };
 
 export const ContextMenu: FC<MenuContextProps> = ({ children, className }) => {
-  const messageContent = useSelector(getMessageContent);
-  const messageId = useSelector(getMessageId);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const message = useSelector(getMessage);
 
   const dispatch = useAppDispatch();
 
@@ -31,27 +29,29 @@ export const ContextMenu: FC<MenuContextProps> = ({ children, className }) => {
   };
 
   const handleCopyMessageText = useCallback(() => {
-    if (messageContent) {
-      navigator.clipboard.writeText(messageContent);
+    if (message.content) {
+      navigator.clipboard.writeText(message.content);
     }
-  }, [messageContent]);
+  }, [message]);
 
   const handleDeleteMessage = useCallback(async () => {
-    console.log(messageId);
-    await dispatch(deleteMessage(messageId));
-  }, [messageId]);
+    await dispatch(deleteMessage(message.id));
+  }, [message]);
 
-  const handleEditMessage = useCallback(() => {}, []);
+  const toggleEdit = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
 
   return (
     <>
       <div onContextMenu={handleContextMenu} className={className}>
         {children}
+        <EditMessage isOpen={isOpen} message={message} onClose={toggleEdit} />
       </div>
       {clicked && (
         <StyledContextMenu top={points.y} left={points.x}>
           <ul>
-            <li>Edit</li>
+            <li onClick={toggleEdit}>Edit</li>
             <li onClick={handleCopyMessageText}>Copy</li>
             <li onClick={handleDeleteMessage}>Delete</li>
           </ul>
