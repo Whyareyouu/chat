@@ -27,26 +27,32 @@ chatAPI.interceptors.response.use(
   async function (error) {
     const originalRequest = error.config;
     const refreshToken = localStorage.getItem(REFRESH_TOKEN);
-    if (
-      error.response.status === 401 &&
-      !originalRequest._retry &&
-      refreshToken
-    ) {
-      originalRequest._retry = true;
-
-      const response = await chatAPI.post<{ token: string }>(
-        "/auth/refresh-token",
-        {
-          refreshToken,
-        }
-      );
-      if (!response.data?.token) {
-        return Promise.reject(error);
-      }
-      localStorage.setItem(ACCESS_TOKEN, response.data.token);
-      originalRequest.headers.Authorization = `Bearer  + ${response.data.token}`;
-      return chatAPI(originalRequest);
+    if (originalRequest.url === `/auth/refresh-token`) {
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
+    try {
+      if (
+        error.response.status === 401 &&
+        !originalRequest._retry &&
+        refreshToken
+      ) {
+        originalRequest._retry = true;
+        const response = await chatAPI.post<{ token: string }>(
+          "/auth/refresh-token",
+          {
+            refreshToken,
+          }
+        );
+        if (!response.data?.token) {
+          originalRequest._retry = false;
+          return Promise.reject(error);
+        }
+        localStorage.setItem(ACCESS_TOKEN, response.data.token);
+        originalRequest.headers.Authorization = `Bearer ${response.data.token}`;
+        return chatAPI(originalRequest);
+      }
+    } catch (e) {
+      return Promise.reject(error);
+    }
   }
 );

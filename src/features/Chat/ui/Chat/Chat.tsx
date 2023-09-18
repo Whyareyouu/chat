@@ -37,7 +37,7 @@ export const Chat = () => {
   const handleSendMessage = useCallback(() => {
     dispatch(
       sendMessage({
-        senderId: userId!, //fix
+        senderId: userId!,
         recipientId: recipientId,
         content: message,
       })

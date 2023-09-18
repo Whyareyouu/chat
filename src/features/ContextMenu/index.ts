@@ -1,1 +1,1 @@
-export { ContextMenu } from "./ui/ContextMenu";
+export { ContextMenu } from "./ui/ContextMenu/ContextMenu";

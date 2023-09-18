@@ -7,6 +7,7 @@ import { searchingReducer } from "features/SearchingUsers";
 import { chatReducer } from "entities/Chat";
 import { allUserChatsReducer } from "widgets/Sidebar";
 import { burgerReducer } from "features/BurgetMenu";
+import { messageReducer } from "entities/Message";
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducers: ReducersMapObject<StateSchema> = {
@@ -17,6 +18,7 @@ export function createReduxStore(initialState?: StateSchema) {
     searching: searchingReducer,
     allUserChats: allUserChatsReducer,
     burger: burgerReducer,
+    message: messageReducer,
   };
 
   return configureStore<StateSchema>({
