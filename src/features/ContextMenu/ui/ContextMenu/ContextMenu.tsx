@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useCallback, useState } from "react";
-import { useContextMenu } from "../../libs/hooks/useContextMenu";
+import { useContextMenu } from "../../lib/hooks/useContextMenu";
 import { StyledContextMenu } from "./ContextMenu.styles";
 import { useSelector } from "react-redux";
 import { deleteMessage, getMessage } from "entities/Message";
