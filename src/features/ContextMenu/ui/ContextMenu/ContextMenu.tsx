@@ -2,9 +2,9 @@ import React, { FC, ReactNode, useCallback, useState } from "react";
 import { useContextMenu } from "../../lib/hooks/useContextMenu";
 import { StyledContextMenu } from "./ContextMenu.styles";
 import { useSelector } from "react-redux";
-import { deleteMessage, getMessage } from "entities/Message";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
+import { getMessage } from "entities/Message";
 import { EditMessage } from "features/ContextMenu/ui/EditMessage/EditMessage";
+import { useChat } from "features/Chat";
 
 type MenuContextProps = {
   children: ReactNode;
@@ -16,7 +16,7 @@ export const ContextMenu: FC<MenuContextProps> = ({ children, className }) => {
 
   const message = useSelector(getMessage);
 
-  const dispatch = useAppDispatch();
+  const { updateMessage, removeMessage } = useChat();
 
   const { clicked, setClicked, points, setPoints } = useContextMenu();
   const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -34,8 +34,8 @@ export const ContextMenu: FC<MenuContextProps> = ({ children, className }) => {
     }
   }, [message]);
 
-  const handleDeleteMessage = useCallback(async () => {
-    await dispatch(deleteMessage(message.id));
+  const handleDeleteMessage = useCallback(() => {
+    removeMessage(message);
   }, [message]);
 
   const toggleEdit = useCallback(() => {
@@ -46,7 +46,12 @@ export const ContextMenu: FC<MenuContextProps> = ({ children, className }) => {
     <>
       <div onContextMenu={handleContextMenu} className={className}>
         {children}
-        <EditMessage isOpen={isOpen} message={message} onClose={toggleEdit} />
+        <EditMessage
+          isOpen={isOpen}
+          message={message}
+          onClose={toggleEdit}
+          updateMessage={updateMessage}
+        />
       </div>
       {clicked && (
         <StyledContextMenu top={points.y} left={points.x}>

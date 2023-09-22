@@ -8,24 +8,22 @@ import {
   Form,
 } from "features/ContextMenu/ui/EditMessage/EditMessage.styles";
 import { MessagesWithUser } from "entities/Chat";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
-import { editMessage } from "entities/Message/model/services/editMessage/editMessage";
 
 interface EditMessageProps {
   isOpen: boolean;
   onClose: () => void;
   message: MessagesWithUser;
+  updateMessage: (message: MessagesWithUser) => void;
 }
 
 export const EditMessage: FC<EditMessageProps> = ({
   isOpen,
   message,
   onClose,
+  updateMessage,
 }) => {
   const { control, handleSubmit, reset } =
     useForm<Pick<MessagesWithUser, "content">>();
-
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (message?.content) {
@@ -38,7 +36,7 @@ export const EditMessage: FC<EditMessageProps> = ({
   const handleChangeMessage = (
     formState: Pick<MessagesWithUser, "content">
   ) => {
-    dispatch(editMessage({ ...message, ...formState }));
+    updateMessage({ ...message, ...formState });
   };
 
   return (

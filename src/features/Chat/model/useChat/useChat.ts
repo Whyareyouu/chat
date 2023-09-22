@@ -1,5 +1,5 @@
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { socket } from "shared/config/socket/socket";
 import { chatActions, MessagesWithUser } from "entities/Chat";
 import { useSelector } from "react-redux";

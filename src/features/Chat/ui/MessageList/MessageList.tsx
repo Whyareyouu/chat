@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import { MessagesWithUser } from "entities/Chat";
 import { Message, MessageType } from "shared/ui/Message/Message";
 import { MessageContainer, MessagesContainer } from "./MessageList.styles";
