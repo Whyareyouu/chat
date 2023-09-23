@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useCallback, useState } from "react";
-import { useContextMenu } from "../../lib/hooks/useContextMenu";
+import { useContextMenu } from "../../model/useContextMenu/useContextMenu";
 import { StyledContextMenu } from "./ContextMenu.styles";
 import { useSelector } from "react-redux";
 import { getMessage } from "entities/Message";
@@ -56,9 +56,9 @@ export const ContextMenu: FC<MenuContextProps> = ({ children, className }) => {
       {clicked && (
         <StyledContextMenu top={points.y} left={points.x}>
           <ul>
-            <li onClick={toggleEdit}>Edit</li>
-            <li onClick={handleCopyMessageText}>Copy</li>
-            <li onClick={handleDeleteMessage}>Delete</li>
+            <li onClick={toggleEdit}>Изменить</li>
+            <li onClick={handleCopyMessageText}>Копировать</li>
+            <li onClick={handleDeleteMessage}>Удалить</li>
           </ul>
         </StyledContextMenu>
       )}

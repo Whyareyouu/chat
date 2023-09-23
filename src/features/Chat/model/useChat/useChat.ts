@@ -1,15 +1,26 @@
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 import { useCallback, useEffect } from "react";
-import { socket } from "shared/config/socket/socket";
 import { chatActions, MessagesWithUser } from "entities/Chat";
 import { useSelector } from "react-redux";
 import { getRecipientId } from "entities/Chat/model/selectors/getRecipientId/getRecipientId";
 import { getUserId } from "entities/User";
+import { io, Socket } from "socket.io-client";
+import { BASE_URL } from "shared/api/api";
+
+let socket: Socket;
 
 export const useChat = () => {
   const recipientId = useSelector(getRecipientId);
   const senderId = useSelector(getUserId);
   const dispatch = useAppDispatch();
+
+  if (!socket) {
+    socket = io(BASE_URL, {
+      query: {
+        userId: senderId,
+      },
+    });
+  }
 
   useEffect(() => {
     socket.on("messages", (messages: MessagesWithUser[]) => {

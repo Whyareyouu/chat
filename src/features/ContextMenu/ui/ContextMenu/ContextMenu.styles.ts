@@ -7,22 +7,26 @@ type StyledContextMenuProps = {
 export const StyledContextMenu = styled.div<StyledContextMenuProps>`
   position: absolute;
   width: 200px;
-  background-color: #383838;
-  border-radius: 5px;
+  background-color: #343333;
+  border-radius: 12px;
   ${({ top, left }) => css`
     top: ${top}px;
     left: ${left}px;
   `}
   ul {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     padding: 10px;
     margin: 0;
     list-style: none;
   }
   ul li {
-    padding: 18px 12px;
+    padding: 4px 12px;
   }
   ul li:hover {
     cursor: pointer;
-    background-color: #000000;
+    border-radius: 4px;
+    background-color: #262525;
   }
 `;
