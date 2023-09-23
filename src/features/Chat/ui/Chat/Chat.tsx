@@ -14,21 +14,17 @@ export const Chat = () => {
   const recipientId = useSelector(getRecipientId);
   const userId = useSelector(getUserId);
   const messages = useSelector(getMessagesWithUser);
-  const [message, setMessage] = useState<string>("");
+  const [content, setContent] = useState<string>("");
   const { sendMessage } = useChat();
-
-  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage(e.target.value);
-  };
 
   const handleSendMessage = useCallback(() => {
     sendMessage({
       senderId: userId!,
       recipientId: recipientId,
-      content: message,
+      content: content,
     });
-    setMessage("");
-  }, [message, recipientId, userId]);
+    setContent("");
+  }, [content, recipientId, userId]);
 
   if (!recipientId) {
     return <EmptyChat />;
@@ -39,8 +35,8 @@ export const Chat = () => {
       <div>
         <MessageSender
           handleSendMessage={handleSendMessage}
-          onChange={onChange}
-          value={message}
+          setContent={setContent}
+          value={content}
         />
       </div>
     </Wrapper>

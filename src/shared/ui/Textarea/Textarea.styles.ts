@@ -11,7 +11,7 @@ export const StyledTextarea = styled.textarea<{ lines?: number }>`
   border-radius: var(--default-border-radius);
   border: none;
   color: var(--white);
-  font-size: var(--default-font-size);
+  font-size: 16px;
   outline: none;
   ::placeholder {
     color: var(--placeholder-color);

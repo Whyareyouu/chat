@@ -8,4 +8,5 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 20px;
   justify-content: space-between;
+  padding: 30px;
 `;

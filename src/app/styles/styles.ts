@@ -21,8 +21,8 @@ const GlobalStyles = createGlobalStyle`
     --border-input: #2e2e2e;
     --input-bg-color: #46464a;
     --input-bg-hover: #4f4f55;
-    --message-bg-incoming: #434556;
-    --message-bg-outgoing: #272A35;
+    --message-bg-incoming: #212121;
+    --message-bg-outgoing: #7d67d3;
 
   }
 
