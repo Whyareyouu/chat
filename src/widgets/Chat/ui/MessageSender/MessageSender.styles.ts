@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import Picker from "@emoji-mart/react";
 import { FaRegFaceSmile } from "react-icons/fa6";
 import { AiOutlineSend } from "react-icons/ai";
 
