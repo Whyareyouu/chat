@@ -36,7 +36,7 @@ export const MessageList: FC<MessageListProps> = ({ messages, userId }) => {
           )}
         </MessageContainer>
       ))}
-      <div ref={ref} />
+      <div ref={ref} style={{ width: "0" }} />
     </MessagesContainer>
   );
 };

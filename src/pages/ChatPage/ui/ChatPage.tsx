@@ -1,4 +1,4 @@
-import { Chat } from "features/Chat";
+import { Chat } from "widgets/Chat";
 import { fetchAllUserChats, Sidebar } from "widgets/Sidebar";
 import { StyledChatPage } from "./ChatPage.styles";
 import { useEffect } from "react";

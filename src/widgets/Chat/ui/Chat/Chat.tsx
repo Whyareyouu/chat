@@ -1,34 +1,27 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { getUserId } from "entities/User";
-
 import { Wrapper } from "./Chat.styles";
 import { MessageSender } from "../MessageSender/MessageSender";
-import { getMessagesWithUser } from "entities/Chat";
-import { EmptyChat } from "features/Chat/ui/EmptyChat/EmptyChat";
-import { MessageList } from "features/Chat/ui/MessageList/MessageList";
-import { getRecipientId } from "entities/Chat/model/selectors/getRecipientId/getRecipientId";
-import { useChat } from "features/Chat/model/useChat/useChat";
+import { getMessagesWithUser, useChat, getRecipientId } from "entities/Chat";
+import { EmptyChat } from "../EmptyChat/EmptyChat";
+import { MessageList } from "../MessageList/MessageList";
 
 export const Chat = () => {
   const recipientId = useSelector(getRecipientId);
   const userId = useSelector(getUserId);
   const messages = useSelector(getMessagesWithUser);
-  const [message, setMessage] = useState<string>("");
+  const [content, setContent] = useState<string>("");
   const { sendMessage } = useChat();
-
-  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage(e.target.value);
-  };
 
   const handleSendMessage = useCallback(() => {
     sendMessage({
       senderId: userId!,
       recipientId: recipientId,
-      content: message,
+      content: content,
     });
-    setMessage("");
-  }, [message, recipientId, userId]);
+    setContent("");
+  }, [content, recipientId, userId]);
 
   if (!recipientId) {
     return <EmptyChat />;
@@ -39,8 +32,8 @@ export const Chat = () => {
       <div>
         <MessageSender
           handleSendMessage={handleSendMessage}
-          onChange={onChange}
-          value={message}
+          setContent={setContent}
+          value={content}
         />
       </div>
     </Wrapper>

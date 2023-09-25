@@ -3,8 +3,8 @@ import { useContextMenu } from "../../model/useContextMenu/useContextMenu";
 import { StyledContextMenu } from "./ContextMenu.styles";
 import { useSelector } from "react-redux";
 import { getMessage } from "entities/Message";
-import { EditMessage } from "features/ContextMenu/ui/EditMessage/EditMessage";
-import { useChat } from "features/Chat";
+import { EditMessage } from "../EditMessage/EditMessage";
+import { useChat } from "entities/Chat";
 
 type MenuContextProps = {
   children: ReactNode;
