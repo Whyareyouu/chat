@@ -1,4 +1,9 @@
 import { useRef, useState } from "react";
+import {
+  MicrophoneIcon,
+  StyledVoiceRecorder,
+} from "features/VoiceRecorder/ui/VoiceRecorder/VoiceRecorder.styles";
+import { ButtonTheme } from "shared/ui/Button/Button";
 
 export const VoiceRecorder = () => {
   const [isRecording, setIsRecording] = useState<boolean>(false);
@@ -36,9 +41,12 @@ export const VoiceRecorder = () => {
   };
   return (
     <div>
-      <button onClick={handleStartRecording}>
-        {isRecording ? "Остановить запись" : "Записать аудио"}
-      </button>
+      <StyledVoiceRecorder
+        theme={ButtonTheme.PRIMARY}
+        onClick={handleStartRecording}
+      >
+        {isRecording ? "Остановить запись" : <MicrophoneIcon />}
+      </StyledVoiceRecorder>
       {audioBlob && (
         <audio controls>
           <source src={URL.createObjectURL(audioBlob)} />
